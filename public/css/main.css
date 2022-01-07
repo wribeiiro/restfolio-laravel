@@ -123,3 +123,7 @@ pre, code {
     background-color: var(--purple);
     color: var(--text);
 }
+
+.list-group-item-action.active {
+    background-color: var(--purple);
+}

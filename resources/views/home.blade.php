@@ -34,23 +34,23 @@
                                         <span class=""><i class="fa fa-folder-open"></i> Well Request</span>
 
                                         <ul class="list-group mt-2">
-                                            <li class="list-group-item d-flex justify-content-start align-items-center list-group-item-action no-border">
+                                            <li class="list-group-item d-flex justify-content-start align-items-center list-group-item-action no-border" data-endpoint="about">
                                                 <span class="badge badge-success badge-pill mr-3">GET</span>
                                                 <span class="">About</span>
                                             </li>
-                                            <li class="list-group-item d-flex justify-content-start align-items-center list-group-item-action no-border">
+                                            <li class="list-group-item d-flex justify-content-start align-items-center list-group-item-action no-border" data-endpoint="education">
                                                 <span class="badge badge-success badge-pill mr-3">GET</span>
                                                 <span class="">Education</span>
                                             </li>
-                                            <li class="list-group-item d-flex justify-content-start align-items-center list-group-item-action no-border">
+                                            <li class="list-group-item d-flex justify-content-start align-items-center list-group-item-action no-border" data-endpoint="skills">
                                                 <span class="badge badge-success badge-pill mr-3">GET</span>
                                                 <span class="">Skills & Experience</span>
                                             </li>
-                                            <li class="list-group-item d-flex justify-content-start align-items-center list-group-item-action no-border">
+                                            <li class="list-group-item d-flex justify-content-start align-items-center list-group-item-action no-border" data-endpoint="works">
                                                 <span class="badge badge-success badge-pill mr-3">GET</span>
                                                 <span class="">Works & Projects</span>
                                             </li>
-                                            <li class="list-group-item d-flex justify-content-start align-items-center list-group-item-action no-border">
+                                            <li class="list-group-item d-flex justify-content-start align-items-center list-group-item-action no-border" data-endpoint="contact">
                                                 <span class="badge badge-success badge-pill mr-3">GET</span>
                                                 <span class="">Contact</span>
                                             </li>
@@ -72,10 +72,10 @@
                                             </select>
                                         </div>
 
-                                        <input type="text" class="form-control" placeholder="" value="{{env('APP_URL')}}/about/well" readonly>
+                                        <input type="text" class="form-control" placeholder="" value="{{env('APP_URL')}}/" readonly id="request-field">
 
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" type="button">Send</button>
+                                            <button class="btn btn-outline-secondary" type="button" id="request-button">Send</button>
                                         </div>
                                     </div>
                                 </div>
@@ -114,9 +114,9 @@
                         <div class="card-body">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
-                                    <span class="badge badge-success ml-2 mt-2">200 OK</span>
-                                    <span class="badge badge-purple ml-2 mt-2">TIME 30ms</span>
-                                    <span class="badge badge-success ml-2 mt-2">SIZE 12B</span>
+                                    <span class="badge badge-success ml-2 mt-2" id="http-status">200 OK</span>
+                                    <span class="badge badge-purple ml-2 mt-2" id="http-time">TIME 30ms</span>
+                                    <span class="badge badge-success ml-2 mt-2" id="http-size">SIZE 12B</span>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -153,4 +153,39 @@
             </div>
         </div>
     </div>
+@section('custom-script')
+    <script>
+        $(document).ready(() => {
+            $.ajaxSetup({
+                beforeSend: (xhr) => xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'))
+            });
+        });
+
+        const endpoint = "{{env('APP_URL')}}/"
+
+        $('.list-group-item-action').click(function () {
+            $('.list-group-item-action').removeClass('active')
+            $(this).addClass('active')
+
+            const resource = $(this).attr('data-endpoint') + '/well'
+            $('#request-field').val(endpoint + resource)
+        });
+
+
+        $('#request-button').click(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: "{{route('profile')}}",
+                type: 'GET',
+                dataType: 'JSON',
+                success: (response, textStatus, xhr) => {
+                    $('#http-status').text(xhr.status + ' OK')
+                    $('#http-size').text('SIZE ' + response.toString().length + 'B')
+                    $('#http-time').text('TIME 30ms')
+                }
+            });
+        })
+    </script>
+@endsection
 @endsection
