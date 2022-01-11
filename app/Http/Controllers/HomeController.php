@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Services\ProfileService;
 
 class HomeController extends Controller
 {
@@ -12,7 +13,9 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(
+        private ProfileService $profileService
+    )
     {
         //$this->middleware('auth');
     }
@@ -29,8 +32,29 @@ class HomeController extends Controller
 
     public function profile(Request $request)
     {
-        $params = $request->route();
+        $param = $request->get('param');
 
-        return response()->json($params, Response::HTTP_OK);
+
+        try {
+            return response()->json([
+                'data' => $this->profileService->$param(),
+                'status' => [
+                    'text' => Response::$statusTexts[Response::HTTP_OK],
+                    'code' => Response::HTTP_OK,
+                    'label' => 'badge-success'
+                ]
+            ], Response::HTTP_OK);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'data' => 'Deu ruim, chama o amir!',
+                'status' => [
+                    'text' => Response::$statusTexts[Response::HTTP_INTERNAL_SERVER_ERROR],
+                    'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                    'label' => 'badge-danger'
+                ]
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+
     }
 }

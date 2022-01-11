@@ -42,9 +42,13 @@
                                                 <span class="badge badge-success badge-pill mr-3">GET</span>
                                                 <span class="">Education</span>
                                             </li>
+                                            <li class="list-group-item d-flex justify-content-start align-items-center list-group-item-action no-border" data-endpoint="experience">
+                                                <span class="badge badge-success badge-pill mr-3">GET</span>
+                                                <span class="">Experience</span>
+                                            </li>
                                             <li class="list-group-item d-flex justify-content-start align-items-center list-group-item-action no-border" data-endpoint="skills">
                                                 <span class="badge badge-success badge-pill mr-3">GET</span>
-                                                <span class="">Skills & Experience</span>
+                                                <span class="">Skills</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-start align-items-center list-group-item-action no-border" data-endpoint="works">
                                                 <span class="badge badge-success badge-pill mr-3">GET</span>
@@ -89,9 +93,9 @@
 
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="request" role="tabpanel" aria-labelledby="request-tab">
-                                        <div div class="preview-code">
+                                        <div class="request-code">
                                             <br>
-                                            <pre>
+                                            <pre id="pre-request-code">
 {
     "_id": "61ca20892b443cd31c55e167",
     "index": 0,
@@ -128,9 +132,9 @@
 
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="response" role="tabpanel" aria-labelledby="response-tab">
-                                        <div div class="preview-code">
+                                        <div class="response-code">
                                             <br>
-                                            <pre>
+                                            <pre id="pre-response-code">
 {
     "_id": "61ca20892b443cd31c55e167",
     "index": 0,
@@ -175,14 +179,36 @@
         $('#request-button').click(function (e) {
             e.preventDefault();
 
+            const ajaxTime = new Date().getTime();
+
             $.ajax({
                 url: "{{route('profile')}}",
                 type: 'GET',
                 dataType: 'JSON',
-                success: (response, textStatus, xhr) => {
-                    $('#http-status').text(xhr.status + ' OK')
-                    $('#http-size').text('SIZE ' + response.toString().length + 'B')
-                    $('#http-time').text('TIME 30ms')
+                data: {
+                    param: $('.list-group-item-action.active').attr('data-endpoint')
+                },
+                success: (response) => {
+                    console.log(response);
+
+                    $('#http-status')
+                        .text(`${response.status.code} ${response.status.text}`)
+                        .removeClass(response.status.label)
+                        .addClass(response.status.label)
+
+                    $('#http-size').text(`SIZE ${response.toString().length}`)
+                    $('#http-time').text(`TIME ${new Date().getTime() - ajaxTime}ms`)
+
+                    $('#pre-response-code').html(response.data)
+                },
+                error: (error) => {
+                    $('#http-status')
+                        .text(`${error.status.code} ${error.status.text}`)
+                        .removeClass(error.status.label)
+                        .addClass(error.status.label)
+
+                    $('#http-size').text(`SIZE ${response.toString().length}`)
+                    $('#http-time').text(`TIME ${new Date().getTime() - ajaxTime}ms`)
                 }
             });
         })
