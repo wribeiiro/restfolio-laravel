@@ -34,7 +34,6 @@ class HomeController extends Controller
     {
         $param = $request->get('param');
 
-
         try {
             return response()->json([
                 'data' => $this->profileService->$param(),

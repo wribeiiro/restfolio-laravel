@@ -16,6 +16,7 @@
 
 pre, code {
     color: #80BA3A;
+    white-space: pre-wrap;
 }
 
 .card {
@@ -24,6 +25,7 @@ pre, code {
     border-radius: 0 !important;
     border: solid 1px #606060;
     border-top: none;
+    height: 700px;;;
 }
 
 .card:first-child {
@@ -87,7 +89,8 @@ pre, code {
 }
 
 .terminal .body {
-    background: var(--black) !important;
+    background: var(--dark-gray) !important;
+    height: 700px;;
 }
 
 .terminal .terminal-bar {
@@ -126,4 +129,24 @@ pre, code {
 
 .list-group-item-action.active {
     background-color: var(--purple);
+}
+
+.string { 
+    color: #DCCE4D; 
+}
+
+.number { 
+    color: #A391F6; 
+}
+
+.boolean { 
+    color: blue; 
+}
+
+.null { 
+    color: magenta; 
+}
+
+.key { 
+    color: #7EB739; 
 }
