@@ -39,7 +39,7 @@ function filterResources() {
 
         if (textInList.indexOf(textToSearch) < 0) {
             $(this).removeClass('d-flex').css("display", "none");
-        } 
+        }
     });
 }
 
@@ -69,7 +69,7 @@ function profileRequest(param) {
         },
         error: (response) => {
             const error = response.responseJSON;
-            
+
             $('#http-status')
                 .text(`${error.status.code} ${error.status.text}`)
                 .removeClass(error.status.label)
@@ -84,13 +84,13 @@ function profileRequest(param) {
 
 function formatJSONHightlight(json) {
     json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    
+
     return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
         let cls = 'number';
-        
+
         if (/^"/.test(match)) {
             cls = 'key';
-            
+
             if (/:$/.test(match)) {
                 cls = 'string';
             }
@@ -98,6 +98,10 @@ function formatJSONHightlight(json) {
             cls = 'boolean';
         } else if (/null/.test(match)) {
             cls = 'null';
+        }
+
+        if (match.includes('http') || match.includes('https')) {
+            match = `<a class="${cls}" href="${match}" target="_blank">${match}</a>`;
         }
 
         return '<span class="' + cls + '">' + match + '</span>';
