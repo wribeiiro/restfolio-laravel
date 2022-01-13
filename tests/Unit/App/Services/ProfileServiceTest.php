@@ -28,7 +28,7 @@ class ProfileServiceTest extends TestCase
         $this->assertIsArray($aboutContent);
         $this->assertNotEmpty($aboutContent);
         $this->assertCount(1, $aboutContent);
-        $this->assertArrayHasKey(0, $aboutContent);
+        $this->assertArrayHasKey("description", $aboutContent);
     }
 
     /**
@@ -39,9 +39,8 @@ class ProfileServiceTest extends TestCase
         $educationContent = $this->profileService->education();
         $this->assertIsArray($educationContent);
         $this->assertNotEmpty($educationContent);
-        $this->assertCount(2, $educationContent);
-        $this->assertArrayHasKey(0, $educationContent);
-        $this->assertArrayHasKey(1, $educationContent);
+        $this->assertCount(1, $educationContent);
+        $this->assertArrayHasKey("institution", $educationContent);
     }
 
     /**
@@ -66,7 +65,7 @@ class ProfileServiceTest extends TestCase
         $this->assertIsArray($skillsContent);
         $this->assertNotEmpty($skillsContent);
         $this->assertCount(2, $skillsContent);
-        $this->assertArrayHasKey("techs", $skillsContent);
+        $this->assertArrayHasKey("technologies", $skillsContent);
         $this->assertArrayHasKey("tools", $skillsContent);
     }
 

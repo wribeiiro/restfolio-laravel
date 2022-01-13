@@ -10,7 +10,9 @@ class ProfileService
     public function about(): array
     {
         return [
-            "Hi Devs 🖖! I'm Wellisson Ribeiro from Brazil 🇧🇷. I'm 25 years old, christian, married, and father of two little girls. Graduated in Analysis and Systems Development at UNOPAR 🎓. I've been working as Developer since 2016 with different technologies, but with a focus on Back-end with PHP (Laravel, Lumen and Code Igniter Frameworks). I'm currently work as a software engineer and studying some things like English 🇺🇸, Laravel 🐘 and Python 🐍 and also reading some books 📚."
+            "description" => "Hi Devs 🖖! I'm Wellisson Ribeiro from Brazil 🇧🇷. I'm 25 years old, christian, married, and father of two little girls.
+            Graduated in Analysis and Systems Development at UNOPAR 🎓. I've been working as Developer since 2016 with different technologies, but with a focus on Back-end with PHP (Laravel, Lumen and Code Igniter Frameworks).
+            I'm currently work as a software engineer and studying some things like English 🇺🇸, Laravel 🐘 and Python 🐍 and also reading some books 📚."
         ];
     }
 
@@ -20,8 +22,10 @@ class ProfileService
     public function education(): array
     {
         return [
-            "Graduated in Systems Analysis and Development At UNOPAR - University North of Paraná - 2015-2018",
-            "Information systems (Studied for 1 year) At UNC - Contestado University - 2014",
+            "institution" => [
+                "Information systems (Studied for 1 year) At UNC - Contestado University - 2014",
+                "Graduated in Systems Analysis and Development At UNOPAR - University North of Paraná - 2015-2018"
+            ],
         ];
     }
 
@@ -102,7 +106,7 @@ class ProfileService
     public function skills(): array
     {
         return [
-            'techs' => ['PHP', 'Laravel', 'Lumen', 'Code Igniter', 'Javascript', 'C#', 'Visual Basic', 'HTML', 'CSS', 'jQuery', 'React', 'Vue.JS', 'Bootstrap', 'Bootstrap', 'Ionic', 'SQL,', 'MySQL', 'PostgreSQL'],
+            'technologies' => ['PHP', 'Laravel', 'Lumen', 'Code Igniter', 'Javascript', 'C#', 'Visual Basic', 'HTML', 'CSS', 'jQuery', 'React', 'Vue.JS', 'Bootstrap', 'Bootstrap', 'Ionic', 'SQL,', 'MySQL', 'PostgreSQL'],
             'tools' => ['Docker', 'Github', 'Github Actions', 'Jira', 'VS Code', 'PHPStorm']
         ];
     }
