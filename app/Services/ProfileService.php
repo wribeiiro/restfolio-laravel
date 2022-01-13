@@ -4,6 +4,9 @@ namespace App\Services;
 
 class ProfileService
 {
+    /**
+     * @return array
+     */
     public function about(): array
     {
         return [
@@ -11,6 +14,9 @@ class ProfileService
         ];
     }
 
+    /**
+     * @return array
+     */
     public function education(): array
     {
         return [
@@ -19,6 +25,9 @@ class ProfileService
         ];
     }
 
+    /**
+     * @return array
+     */
     public function experience(): array
     {
         return [
@@ -87,6 +96,9 @@ class ProfileService
         ];
     }
 
+    /**
+     * @return array
+     */
     public function skills(): array
     {
         return [
@@ -95,6 +107,9 @@ class ProfileService
         ];
     }
 
+    /**
+     * @return array
+     */
     public function works(): array
     {
         return [
@@ -145,6 +160,9 @@ class ProfileService
         ];
     }
 
+    /**
+     * @return array
+     */
     public function contact(): array
     {
         return [

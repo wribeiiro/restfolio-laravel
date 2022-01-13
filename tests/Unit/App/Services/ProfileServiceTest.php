@@ -2,16 +2,11 @@
 
 namespace App\Services;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Services\ProfileService;
 
 class ProfileServiceTest extends TestCase
 {
-    /**
-     * @var \App\Services\ProfileService
-     */
+
     private ProfileService $profileService;
 
     /**
@@ -32,6 +27,7 @@ class ProfileServiceTest extends TestCase
         $aboutContent = $this->profileService->about();
         $this->assertIsArray($aboutContent);
         $this->assertNotEmpty($aboutContent);
+        $this->assertCount(1, $aboutContent);
         $this->assertArrayHasKey(0, $aboutContent);
     }
 
@@ -43,6 +39,7 @@ class ProfileServiceTest extends TestCase
         $educationContent = $this->profileService->education();
         $this->assertIsArray($educationContent);
         $this->assertNotEmpty($educationContent);
+        $this->assertCount(2, $educationContent);
         $this->assertArrayHasKey(0, $educationContent);
         $this->assertArrayHasKey(1, $educationContent);
     }
@@ -55,6 +52,7 @@ class ProfileServiceTest extends TestCase
         $experienceContent = $this->profileService->experience();
         $this->assertIsArray($experienceContent);
         $this->assertNotEmpty($experienceContent);
+        $this->assertCount(6, $experienceContent);
         $this->assertArrayHasKey("company", $experienceContent[0]);
         $this->assertArrayHasKey("details", $experienceContent[0]);
     }
@@ -67,6 +65,7 @@ class ProfileServiceTest extends TestCase
         $skillsContent = $this->profileService->skills();
         $this->assertIsArray($skillsContent);
         $this->assertNotEmpty($skillsContent);
+        $this->assertCount(2, $skillsContent);
         $this->assertArrayHasKey("techs", $skillsContent);
         $this->assertArrayHasKey("tools", $skillsContent);
     }
@@ -79,6 +78,7 @@ class ProfileServiceTest extends TestCase
         $worksContent = $this->profileService->works();
         $this->assertIsArray($worksContent);
         $this->assertNotEmpty($worksContent);
+        $this->assertCount(11, $worksContent);
         $this->assertArrayHasKey("description", $worksContent[0]);
         $this->assertArrayHasKey("link", $worksContent[0]);
     }
@@ -91,6 +91,7 @@ class ProfileServiceTest extends TestCase
         $contactContent = $this->profileService->contact();
         $this->assertIsArray($contactContent);
         $this->assertNotEmpty($contactContent);
+        $this->assertCount(3, $contactContent);
         $this->assertArrayHasKey("email", $contactContent);
         $this->assertArrayHasKey("linkedin", $contactContent);
         $this->assertArrayHasKey("github", $contactContent);
