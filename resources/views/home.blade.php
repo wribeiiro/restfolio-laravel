@@ -72,7 +72,7 @@
                                         <div class="input-group-prepend">
                                             <select class="btn btn-outline-secondary" name="" id="">
                                                 <option value="GET" selected>GET</option>
-                                                <option value="GET" disabled>POST</option>
+                                                <option value="POST" disabled>POST</option>
                                             </select>
                                         </div>
 

@@ -8,16 +8,17 @@ use App\Services\ProfileService;
 
 class HomeController extends Controller
 {
+
+    private ProfileService $profileService;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(
-        private ProfileService $profileService
-    )
+    public function __construct(ProfileService $profileService)
     {
         //$this->middleware('auth');
+        $this->profileService = $profileService;
     }
 
     /**

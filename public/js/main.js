@@ -68,7 +68,8 @@ function profileRequest(param) {
             $('#pre-response-code').html(formatJSONHightlight(JSON.stringify(response, null, 2)))
         },
         error: (response) => {
-            const error = response.responseJSON;
+            console.log(response)
+            const error = response.responseJSON || {status: {code: 401, text: 'Unauthorized', label: 'badge-warning'}};
 
             $('#http-status')
                 .text(`${error.status.code} ${error.status.text}`)
