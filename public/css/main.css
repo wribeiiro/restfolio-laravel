@@ -14,6 +14,10 @@
     --synth-blue: #011EFE;
 }
 
+body {
+    background: var(--purple) !important;
+}
+
 pre, code {
     color: #80BA3A;
     white-space: pre-wrap;

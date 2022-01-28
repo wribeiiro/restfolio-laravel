@@ -7,7 +7,7 @@ $('.list-group-item-action').click(function () {
     $('.list-group-item-action').removeClass('active')
     $(this).addClass('active')
 
-    const resource = $(this).attr('data-endpoint') + '/well'
+    const resource = $(this).attr('data-endpoint')
     $('#request-field').val(endpoint + resource)
 });
 
