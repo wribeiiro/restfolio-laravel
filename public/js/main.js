@@ -45,6 +45,7 @@ function filterResources() {
 
 function profileRequest(param) {
     const ajaxTime = new Date().getTime();
+    const sendButton = $('#request-button')
 
     $.ajax({
         url: `${endpoint}profile/`,
@@ -56,6 +57,7 @@ function profileRequest(param) {
         beforeSend: (xhr) => {
             xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
             $('#pre-response-code').html('{<br> Processing request... <br>}')
+            sendButton.attr('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Send')
         },
         success: (response) => {
             $('#http-status')
@@ -66,9 +68,9 @@ function profileRequest(param) {
             $('#http-size').text(`SIZE ${response.toString().length}`)
             $('#http-time').text(`TIME ${new Date().getTime() - ajaxTime}ms`)
             $('#pre-response-code').html(formatJSONHightlight(JSON.stringify(response, null, 2)))
+            sendButton.removeAttr('disabled').html('Send')
         },
         error: (response) => {
-            console.log(response)
             const error = response.responseJSON || {status: {code: 401, text: 'Unauthorized', label: 'badge-warning'}};
 
             $('#http-status')
@@ -79,6 +81,7 @@ function profileRequest(param) {
             $('#http-size').text(`SIZE ${error.toString().length}`)
             $('#http-time').text(`TIME ${new Date().getTime() - ajaxTime}ms`)
             $('#pre-response-code').html(formatJSONHightlight(JSON.stringify(error, null, 2)))
+            sendButton.removeAttr('disabled').html('Send')
         }
     });
 }
@@ -105,6 +108,6 @@ function formatJSONHightlight(json) {
             match = `<a class="${cls}" href="${match}" target="_blank">${match}</a>`;
         }
 
-        return '<span class="' + cls + '">' + match + '</span>';
+        return `<span class="${cls}">${match}</span>`;
     });
 }

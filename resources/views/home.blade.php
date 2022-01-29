@@ -10,7 +10,7 @@
                     <span class="circle bg-success"></span>
                     <span class="circle bg-danger"></span>
                 </div>
-                <div class="terminal-title text-center">Wellisson Ribeiro - Portfólio</div>
+                <div class="terminal-title text-center">{{ config('app.name', 'Laravel') }}</div>
             </div>
 
             <div class="body">
